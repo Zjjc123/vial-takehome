@@ -1,33 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import Card from './components/Card'
+
+interface Subject {
+  id: string
+  name: string
+  age: number
+  gender: string
+  diagnosisDate: string
+  status: string
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    fetch('https://055d8281-4c59-4576-9474-9b4840b30078.mock.pstmn.io/subjects')
+      .then(response => response.json())
+      .then(data => setData(data.data))
+  }, [])
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {data.map((item: Subject) => (
+        <Card key={item.id} name={item.name} />
+      ))}
     </>
   )
 }
