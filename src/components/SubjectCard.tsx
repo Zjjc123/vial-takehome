@@ -2,12 +2,12 @@ import React from 'react';
 import { Card, Text } from '@mantine/core';
 
 export interface SubjectCardProps {
-    id: string;
-    name: string;
-    age: number;
-    gender: string;
-    diagnosisDate: string;
-    status: string;
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+  diagnosisDate: string;
+  status: string;
 }
 
 const SubjectCard: React.FC<SubjectCardProps> = ({ id, name, age, gender, diagnosisDate, status }) => {
