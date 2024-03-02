@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react'
-import './App.css'
-import Card from './components/Card'
 
-interface Subject {
-  id: string
-  name: string
-  age: number
-  gender: string
-  diagnosisDate: string
-  status: string
-}
+import '@mantine/core/styles.css';
+import { MantineProvider } from '@mantine/core';
+
+import './App.css'
+import SubjectCard, { SubjectCardProps } from './components/SubjectCard';
+
 
 function App() {
   const [data, setData] = useState([])
@@ -21,11 +17,11 @@ function App() {
   }, [])
 
   return (
-    <>
-      {data.map((item: Subject) => (
-        <Card key={item.id} name={item.name} />
+    <MantineProvider>
+      {data.map((item: SubjectCardProps) => (
+        <SubjectCard key={item.id} {...item} />
       ))}
-    </>
+    </MantineProvider>
   )
 }
 
