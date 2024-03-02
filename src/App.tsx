@@ -4,7 +4,7 @@ import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
 
 import './App.css'
-import SubjectCard, { SubjectCardProps } from './components/SubjectCard';
+import SubjectTable from './components/SubjectTable';
 
 
 function App() {
@@ -18,9 +18,7 @@ function App() {
 
   return (
     <MantineProvider>
-      {data.map((item: SubjectCardProps) => (
-        <SubjectCard key={item.id} {...item} />
-      ))}
+      <SubjectTable data={data} />
     </MantineProvider>
   )
 }
