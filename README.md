@@ -14,11 +14,15 @@
   - gender (dropdown)
   - diagnosis date (calendar range)
   - status (dropdown)
+- sort by attributes (ascending)
+  - name
+  - age
+    diagnosis date
+- colored tag based on status
+- mobile accessibility (flexbox)
 
 ## Future
 
+- CI/CD
 - export selected data as json
-- sort by attributes
-- color code cards based on
-- mobile accessibility (flexbox)
 - light/dark mode with mantine
