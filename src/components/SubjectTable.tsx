@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Flex, Select, TextInput, RangeSlider, Menu, Button, Container } from '@mantine/core';
-import { DateInput, DatePicker } from '@mantine/dates';
+import { DateInput } from '@mantine/dates';
 
 import SubjectCard, { SubjectCardProps } from './SubjectCard';
 

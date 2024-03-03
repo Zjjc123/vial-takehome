@@ -20,9 +20,10 @@
     diagnosis date
 - colored tag based on status
 - mobile accessibility (flexbox)
+- CI/CD
 
 ## Future
 
-- CI/CD
+- UI testing with Storybook
 - export selected data as json
 - light/dark mode with mantine
