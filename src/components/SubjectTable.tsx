@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Select, TextInput, RangeSlider, Menu, Button, Container } from '@mantine/core';
-import { DatePicker } from '@mantine/dates';
+import { DateInput, DatePicker } from '@mantine/dates';
 
 import SubjectCard, { SubjectCardProps } from './SubjectCard';
 
 import '@mantine/dates/styles.css';
 
-import { AiOutlineFilter } from 'react-icons/ai';
+import { AiOutlineFilter, AiOutlineSortAscending } from 'react-icons/ai';
 
 interface Props {
   data: SubjectCardProps[];
@@ -19,7 +19,8 @@ export default function SubjectTable({ data }: Props) {
 
   const [name, setName] = useState<string | null>('');
   const [age, setAge] = useState<[number, number]>([0, maxAge]);
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
   const [gender, setGender] = useState<string | null>('All');
   const [status, setStatus] = useState<string | null>('All');
 
@@ -47,10 +48,9 @@ export default function SubjectTable({ data }: Props) {
       });
     }
 
-    if (dateRange[0] && dateRange[1]) {
+    if (startDate && endDate) {
       filtered = filtered.filter((item) => {
-        const diagnosisDate = new Date(item.diagnosisDate);
-        if (dateRange[0] && dateRange[1] && diagnosisDate >= dateRange[0] && diagnosisDate <= dateRange[1]) {
+        if (new Date(item.diagnosisDate) >= startDate && new Date(item.diagnosisDate) <= endDate) {
           return item;
         }
       });
@@ -73,10 +73,27 @@ export default function SubjectTable({ data }: Props) {
     }
 
     setFilteredData(filtered);
-  }, [data, name, age, dateRange, status, gender]);
+  }, [data, name, age, startDate, endDate, status, gender]);
+
+  const sortByName = () => {
+    const sorted = [...filteredData].sort((a, b) => a.name.localeCompare(b.name));
+    setFilteredData(sorted);
+  };
+
+  const sortByAge = () => {
+    const sorted = [...filteredData].sort((a, b) => a.age - b.age);
+    setFilteredData(sorted);
+  };
+
+  const sortByDiagnosisDate = () => {
+    const sorted = [...filteredData].sort(
+      (a, b) => new Date(a.diagnosisDate).getTime() - new Date(b.diagnosisDate).getTime(),
+    );
+    setFilteredData(sorted);
+  };
 
   return (
-    <Container mih={'100vh'} pt="lg">
+    <Container mih={'100vh'} py="xl">
       <Flex justify="center" align="center" pb="sm" wrap="wrap">
         <TextInput
           style={{ width: 300 }}
@@ -103,10 +120,6 @@ export default function SubjectTable({ data }: Props) {
               />
             </Menu.Item>
             <Menu.Item>
-              <Menu.Label>Diagnosis Date</Menu.Label>
-              <DatePicker type="range" value={dateRange} onChange={setDateRange} />
-            </Menu.Item>
-            <Menu.Item>
               <Menu.Label>Gender</Menu.Label>
               <Select
                 data={['All', 'Male', 'Female']}
@@ -130,6 +143,39 @@ export default function SubjectTable({ data }: Props) {
                 }}
               />
             </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item closeMenuOnClick={false}>
+              <Menu.Label>Diagnosis Date</Menu.Label>
+              <DateInput
+                clearable
+                placeholder="Select start date"
+                value={startDate}
+                onChange={(value) => {
+                  setStartDate(value);
+                }}
+              />
+              <Menu.Label>to</Menu.Label>
+              <DateInput
+                clearable
+                placeholder="Select end date"
+                value={endDate}
+                onChange={(value) => {
+                  setEndDate(value);
+                }}
+              />
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
+        <Menu>
+          <Menu.Target>
+            <Button leftSection={<AiOutlineSortAscending size={20} />} variant="light">
+              Sort
+            </Button>
+          </Menu.Target>
+          <Menu.Dropdown>
+            <Menu.Item onClick={() => sortByName()}>Sort by Name</Menu.Item>
+            <Menu.Item onClick={() => sortByAge()}>Sort by Age</Menu.Item>
+            <Menu.Item onClick={() => sortByDiagnosisDate()}>Sort by Diagnosis Date</Menu.Item>
           </Menu.Dropdown>
         </Menu>
       </Flex>
