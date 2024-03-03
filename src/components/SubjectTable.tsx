@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Select, TextInput, RangeSlider } from '@mantine/core';
+import { Flex, Select, TextInput, RangeSlider, Menu, Button, Container } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 
 import SubjectCard, { SubjectCardProps } from './SubjectCard';
 
 import '@mantine/dates/styles.css';
+
+import { AiOutlineFilter } from 'react-icons/ai';
 
 interface Props {
   data: SubjectCardProps[];
@@ -74,41 +76,69 @@ export default function SubjectTable({ data }: Props) {
   }, [data, name, age, dateRange, status, gender]);
 
   return (
-    <>
-      <TextInput placeholder="Search by name" onChange={(event) => setName(event.currentTarget.value)} />
-      <RangeSlider
-        defaultValue={[1, maxAge]}
-        min={1}
-        max={maxAge}
-        step={1}
-        onChange={(value) => {
-          setAge(value);
-        }}
-      />
-      <DatePicker type="range" value={dateRange} onChange={setDateRange} />;
-      <Select
-        data={['All', 'Male', 'Female']}
-        allowDeselect={false}
-        defaultValue="All"
-        onChange={(value) => {
-          setGender(value);
-        }}
-      />
-      <Select
-        data={['All', 'Active', 'Inactive']}
-        allowDeselect={false}
-        defaultValue="All"
-        onChange={(value) => {
-          setStatus(value);
-        }}
-      />
-      <Grid gutter="lg">
+    <Container mih={'100vh'} pt="lg">
+      <Flex justify="center" align="center" pb="sm" wrap="wrap">
+        <TextInput
+          style={{ width: 300 }}
+          placeholder="Search by name"
+          onChange={(event) => setName(event.currentTarget.value)}
+        />
+        <Menu closeOnItemClick={false}>
+          <Menu.Target>
+            <Button leftSection={<AiOutlineFilter size={20} />} variant="light">
+              Filter
+            </Button>
+          </Menu.Target>
+          <Menu.Dropdown>
+            <Menu.Label>Age</Menu.Label>
+            <Menu.Item>
+              <RangeSlider
+                defaultValue={[1, maxAge]}
+                min={1}
+                max={maxAge}
+                step={1}
+                onChange={(value) => {
+                  setAge(value);
+                }}
+              />
+            </Menu.Item>
+            <Menu.Item>
+              <Menu.Label>Diagnosis Date</Menu.Label>
+              <DatePicker type="range" value={dateRange} onChange={setDateRange} />
+            </Menu.Item>
+            <Menu.Item>
+              <Menu.Label>Gender</Menu.Label>
+              <Select
+                data={['All', 'Male', 'Female']}
+                allowDeselect={false}
+                defaultValue="All"
+                value={gender}
+                onChange={(value) => {
+                  setGender(value);
+                }}
+              />
+            </Menu.Item>
+            <Menu.Item>
+              <Menu.Label>Status</Menu.Label>
+              <Select
+                data={['All', 'Active', 'Inactive']}
+                allowDeselect={false}
+                defaultValue="All"
+                value={status}
+                onChange={(value) => {
+                  setStatus(value);
+                }}
+              />
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
+      </Flex>
+
+      <Flex gap="xs" justify="center" align="flex-start" wrap="wrap">
         {filteredData.map((item: SubjectCardProps) => (
-          <Grid.Col span={4} key={item.id}>
-            <SubjectCard key={item.id} {...item} />
-          </Grid.Col>
+          <SubjectCard key={item.id} {...item} />
         ))}
-      </Grid>
-    </>
+      </Flex>
+    </Container>
   );
 }

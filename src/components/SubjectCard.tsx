@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Text } from '@mantine/core';
+import { Card, Group, Pill, Text } from '@mantine/core';
 
 export interface SubjectCardProps {
   id: string;
@@ -12,13 +12,37 @@ export interface SubjectCardProps {
 
 const SubjectCard: React.FC<SubjectCardProps> = ({ id, name, age, gender, diagnosisDate, status }) => {
   return (
-    <Card shadow="xs" padding="md" style={{ maxWidth: 400, margin: '0 auto' }}>
-      <Text size="lg">{name}</Text>
-      <Text size="sm">ID: {id}</Text>
-      <Text size="sm">Age: {age}</Text>
-      <Text size="sm">Gender: {gender}</Text>
-      <Text size="sm">Diagnosis Date: {new Date(diagnosisDate).toLocaleDateString()}</Text>
-      <Text size="sm">Status: {status}</Text>
+    <Card shadow="xs" padding="md" w={300} m={'s'}>
+      <Card.Section withBorder inheritPadding py="xs">
+        <Group justify="space-between">
+          <Text size="lg" fw={500}>
+            {name}
+          </Text>
+          {status === 'Active' ? (
+            <Pill bg="teal">
+              <Text size="xs" c="white" lh="lg">
+                Active
+              </Text>
+            </Pill>
+          ) : (
+            <Pill bg="red">
+              <Text size="xs" c="white" lh="lg">
+                Inactive
+              </Text>
+            </Pill>
+          )}
+        </Group>
+      </Card.Section>
+
+      <Card.Section p="md">
+        <Text size="sm">Age: {age}</Text>
+        <Text size="sm">Gender: {gender}</Text>
+        <Text size="sm">Diagnosis Date: {new Date(diagnosisDate).toLocaleDateString()}</Text>
+
+        <Text size={'10'} lh="md">
+          ID: {id}
+        </Text>
+      </Card.Section>
     </Card>
   );
 };
