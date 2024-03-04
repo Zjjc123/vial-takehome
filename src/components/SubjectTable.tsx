@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Flex, Select, TextInput, RangeSlider, Menu, Button, Container, Loader } from '@mantine/core';
+import { useState, useEffect, ReactElement } from 'react';
+import { Flex, Select, TextInput, RangeSlider, Menu, Button, Container, Loader, Pagination } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 
 import SubjectCard, { SkeletonCard, SubjectCardProps } from './SubjectCard';
@@ -12,8 +12,20 @@ interface Props {
   data: SubjectCardProps[];
 }
 
+const PAGE_SIZE = 9;
+
+const chunk = <T,>(array: T[], size: number): T[][] => {
+  if (!array.length) {
+    return [];
+  }
+  const head = array.slice(0, size);
+  const tail = array.slice(size);
+  return [head, ...chunk(tail, size)];
+};
+
 export default function SubjectTable({ data }: Props) {
   const [filteredData, setFilteredData] = useState(data);
+  const [activePage, setPage] = useState(1);
 
   const [maxAge, setMaxAge] = useState<number>(100);
 
@@ -106,8 +118,15 @@ export default function SubjectTable({ data }: Props) {
     linkElement.click();
   };
 
+  let displayDataChunk: SubjectCardProps[][] = [];
+  let displayData: ReactElement[] = [];
+  if (filteredData.length > 0) {
+    displayDataChunk = chunk(filteredData, PAGE_SIZE);
+    displayData = displayDataChunk[activePage - 1].map((item) => <SubjectCard key={item.id} {...item} />);
+  }
+
   return (
-    <Container mih={'100vh'} py="xl" mt="lg">
+    <Container mih={'100vh'} py="xl" my="lg">
       <Flex justify="center" align="center" pb="sm" wrap="wrap">
         <TextInput
           style={{ width: 300 }}
@@ -203,17 +222,20 @@ export default function SubjectTable({ data }: Props) {
       <Flex gap="xs" justify="center" align="flex-start" wrap="wrap">
         {data.length === 0 ? (
           <>
-            {Array.from({ length: 12 }).map((_, index) => (
+            {Array.from({ length: PAGE_SIZE }).map((_, index) => (
               <>
                 <SkeletonCard key={index} />
               </>
             ))}
             <Loader size="md" pos="absolute" top="50%" left="50%" />
           </>
+        ) : displayData.length > 0 ? (
+          displayData
         ) : (
-          filteredData.map((item: SubjectCardProps) => <SubjectCard key={item.id} {...item} />)
+          <p>No data found</p>
         )}
       </Flex>
+      <Pagination mt={'xl'} total={displayDataChunk.length} value={activePage} onChange={setPage} siblings={1} />
     </Container>
   );
 }

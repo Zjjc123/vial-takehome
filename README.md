@@ -65,6 +65,7 @@ https://zjjc123.github.io/vial-takehome/
 
 ### Others
 
+- Pagination
 - Skeleton Cards and animated Loader on loading
 - Colored tag based on status
 - Light/Dark mode with mantine
