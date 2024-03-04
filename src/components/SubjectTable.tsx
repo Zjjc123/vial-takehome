@@ -94,6 +94,18 @@ export default function SubjectTable({ data }: Props) {
     setFilteredData(sorted);
   };
 
+  const exportFilteredDataJson = () => {
+    const dataStr = JSON.stringify(filteredData);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+    const exportFileDefaultName = 'data.json';
+
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+  };
+
   return (
     <Container mih={'100vh'} py="xl">
       <Flex justify="center" align="center" pb="sm" wrap="wrap">
@@ -184,6 +196,9 @@ export default function SubjectTable({ data }: Props) {
             <Menu.Item onClick={() => sortByDiagnosisDate()}>Sort by Diagnosis Date</Menu.Item>
           </Menu.Dropdown>
         </Menu>
+        <Button ml="lg" variant="light" color="red" onClick={() => exportFilteredDataJson()}>
+          Export
+        </Button>
       </Flex>
       <Flex gap="xs" justify="center" align="flex-start" wrap="wrap">
         {data.length === 0 ? (

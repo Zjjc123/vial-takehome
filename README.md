@@ -70,8 +70,8 @@ https://zjjc123.github.io/vial-takehome/
 - Light/Dark mode with mantine
 - Mobile accessibility (flexbox)
 - CI/CD
+- Export selected data as json
 
 ## Future
 
 - UI testing with Storybook
-- export selected data as json
