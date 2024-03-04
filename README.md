@@ -1,6 +1,24 @@
 # Vial Takehome Assignment [![Deploy](https://github.com/Zjjc123/vial-takehome/actions/workflows/main.yml/badge.svg)](https://github.com/Zjjc123/vial-takehome/actions/workflows/main.yml)
 
-## Set Up
+<center>
+<img src="./docs/home.png" alt="Home" width="50%"/>
+</center
+>
+
+### Table of Contents
+
+- [Set Up](#set-up)
+- [Development](#development)
+  - [Start the development server](#start-the-development-server)
+  - [Run linter](#run-linter)
+  - [Run storybook](#run-storybook)
+- [Deploy](#deploy)
+- [Implemented Functionalities](#implemented-functionalities)
+  - [Filtering](#filtering)
+  - [Sort by attributes (ascending)](#sort-by-attributes-ascending)
+  - [Additional](#Additional)
+
+# Set Up
 
 Clone the repository
 
@@ -15,18 +33,12 @@ Install dependencies
 npm install
 ```
 
-## Development
+# Development
 
 ### Start the development server on http://localhost:5173/vial-takehome/
 
 ```bash
 npm run dev
-```
-
-### Run tests
-
-```bash
-npm run test
 ```
 
 ### Run linter
@@ -35,21 +47,34 @@ npm run test
 npm run lint
 ```
 
-### Run storybook
+### Run storybook (isolated component development)
 
 ```bash
 npm run storybook
 ```
 
-## Deploy
+<p float="left">
+<img src="./docs/storybook1.png" alt="Storybook" width="45%"/>
+<img src="./docs//storybook2.png" alt="Storybook" width="45%"/>
+</p>
+
+# Deploy
 
 The app is deployed on GitHub Pages. The deployment is automated with GitHub Actions.
 
 https://zjjc123.github.io/vial-takehome/
 
-## Implemented Functionalities
+<center>
+<img src="./docs/action.png" alt="Deploy" width="70%"/>
+</center>
 
-### Filtering
+# Implemented Functionalities
+
+<center>
+<img src="./docs/toolbar.png" alt="Deploy" width="60%"/>
+</center>
+
+## Filtering
 
 - Name (search bar)
 - Age (range slider)
@@ -57,22 +82,51 @@ https://zjjc123.github.io/vial-takehome/
 - Diagnosis date (calendar range)
 - Status (dropdown)
 
-### Sort by attributes (ascending)
+<center>
+<img src="./docs/filter.png" alt="Deploy" width="20%"/>
+</center>
+
+## Sort by attributes (ascending)
 
 - Name
 - Age
 - Diagnosis Date
 
-### Others
+<center>
+<img src="./docs/sort.png" alt="Deploy" width="20%"/>
+</center>
 
-- Pagination
-- Skeleton Cards and animated Loader on loading
-- Colored tag based on status
-- Light/Dark mode with mantine
-- Mobile accessibility (flexbox)
-- CI/CD
-- Export selected data as json
+## Additional
 
-## Future
+### Pagination
 
-- UI testing with Storybook
+<center>
+<img src="./docs/page.png" alt="Deploy" width="60%"/>
+</center>
+
+### Skeleton Cards and animated Loader on loading
+
+<center>
+<img src="./docs/skeleton.png" alt="Deploy" width="60%"/>
+</center>
+
+### Light/Dark mode with mantine
+
+<p>
+<img src="./docs/light.png" alt="Deploy" width="45%"/>
+<img src="./docs/dark.png" alt="Deploy" width="45%"/>
+</p>
+
+### Mobile accessibility (flexbox)
+
+<center>
+<img src="./docs/mobile.png" alt="Deploy" width="30%"/>
+</center>
+
+### Export selected data as json
+
+Exporting Filtered Data (only Female)
+
+<center>
+<img src="./docs/female.png" alt="Deploy" width="20%"/>
+</center>
