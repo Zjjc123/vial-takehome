@@ -78,7 +78,7 @@ I picked Vite (react typescript template) as the build tool for this project. It
 
 ### Mantine
 
-I used Mantine for the UI components. It was recommended in the specs and I found it to be a great library with a lot of useful components including the light/dark mode switch.
+I used Mantine for the UI components. It was recommended in the specs and I found it to be a great library with a lot of useful components like Menu and Inputs. It also has the theme feature which I used for the light/dark mode.
 
 ### Storybook
 
