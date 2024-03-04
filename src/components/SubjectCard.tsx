@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Group, Pill, Text } from '@mantine/core';
+import { Card, Group, Pill, Skeleton, Text } from '@mantine/core';
 
 export interface SubjectCardProps {
   id: string;
@@ -43,6 +43,20 @@ const SubjectCard: React.FC<SubjectCardProps> = ({ id, name, age, gender, diagno
           ID: {id}
         </Text>
       </Card.Section>
+    </Card>
+  );
+};
+
+export const SkeletonCard = () => {
+  return (
+    <Card shadow="xs" padding="md" w={300} m={'s'}>
+      <Card.Section withBorder inheritPadding py="xs">
+        <Skeleton height={20} width={100} my={8} radius="xl" />
+      </Card.Section>
+      <Skeleton height={8} width={100} mt={16} mb={6} radius="xl" />
+      <Skeleton height={8} width={140} my={6} radius="xl" />
+      <Skeleton height={8} width={250} my={6} radius="xl" />
+      <Skeleton height={4} my={4} radius="xl" />
     </Card>
   );
 };

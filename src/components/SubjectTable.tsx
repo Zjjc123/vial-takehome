@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Flex, Select, TextInput, RangeSlider, Menu, Button, Container } from '@mantine/core';
+import { Flex, Select, TextInput, RangeSlider, Menu, Button, Container, Loader } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 
-import SubjectCard, { SubjectCardProps } from './SubjectCard';
+import SubjectCard, { SkeletonCard, SubjectCardProps } from './SubjectCard';
 
 import '@mantine/dates/styles.css';
 
@@ -185,11 +185,19 @@ export default function SubjectTable({ data }: Props) {
           </Menu.Dropdown>
         </Menu>
       </Flex>
-
       <Flex gap="xs" justify="center" align="flex-start" wrap="wrap">
-        {filteredData.map((item: SubjectCardProps) => (
-          <SubjectCard key={item.id} {...item} />
-        ))}
+        {data.length === 0 ? (
+          <>
+            {Array.from({ length: 12 }).map((_, index) => (
+              <>
+                <SkeletonCard key={index} />
+              </>
+            ))}
+            <Loader size="md" pos="absolute" top="50%" left="50%" />
+          </>
+        ) : (
+          filteredData.map((item: SubjectCardProps) => <SubjectCard key={item.id} {...item} />)
+        )}
       </Flex>
     </Container>
   );
