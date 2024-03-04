@@ -107,7 +107,7 @@ export default function SubjectTable({ data }: Props) {
   };
 
   return (
-    <Container mih={'100vh'} py="xl">
+    <Container mih={'100vh'} py="xl" mt="lg">
       <Flex justify="center" align="center" pb="sm" wrap="wrap">
         <TextInput
           style={{ width: 300 }}
