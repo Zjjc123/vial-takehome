@@ -13,6 +13,7 @@
   - [Run linter](#run-linter)
   - [Run storybook](#run-storybook)
 - [Deploy](#deploy)
+- [Tooling](#tooling)
 - [Implemented Functionalities](#implemented-functionalities)
   - [Filtering](#filtering)
   - [Sort by attributes (ascending)](#sort-by-attributes-ascending)
@@ -68,6 +69,20 @@ https://zjjc123.github.io/vial-takehome/
 <center>
 <img src="./docs/action.png" alt="Deploy" width="70%"/>
 </center>
+
+# Tooling
+
+### Vite
+
+I picked Vite (react typescript template) as the build tool for this project. It provides a faster development experience and better performance compared to CRA
+
+### Mantine
+
+I used Mantine for the UI components. It was recommended in the specs and I found it to be a great library with a lot of useful components including the light/dark mode switch.
+
+### Storybook
+
+I used Storybook for isolated component development. It was very helpful in developing and testing the components individually.
 
 # Implemented Functionalities
 
