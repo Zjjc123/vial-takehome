@@ -17,6 +17,7 @@
   - [Filtering](#filtering)
   - [Sort by attributes (ascending)](#sort-by-attributes-ascending)
   - [Additional](#Additional)
+- [Acknowledgement](#acknowledgement)
 
 # Set Up
 
@@ -130,3 +131,13 @@ Exporting Filtered Data (only Female)
 <center>
 <img src="./docs/female.png" alt="Deploy" width="20%"/>
 </center>
+
+# Acknowledgement
+
+- [Vite](https://vitejs.dev/)
+- [Mantine](https://mantine.dev/)
+- [Storybook](https://storybook.js.org/)
+
+Thank you to the Vial team for this opportunity. I had a lot of fun working on this project. I look forward to hearing from you soon.
+
+Jason Zhang 2024
