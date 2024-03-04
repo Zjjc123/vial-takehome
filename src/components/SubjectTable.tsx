@@ -5,10 +5,9 @@ import SubjectCard, { SkeletonCard, SubjectCardProps } from './SubjectCard';
 
 import '@mantine/dates/styles.css';
 
-import Toolbar from './Toolbar';
-
 interface Props {
   data: SubjectCardProps[];
+  filteredData: SubjectCardProps[];
 }
 
 const PAGE_SIZE = 9;
@@ -22,8 +21,7 @@ const chunk = <T,>(array: T[], size: number): T[][] => {
   return [head, ...chunk(tail, size)];
 };
 
-export default function SubjectTable({ data }: Props) {
-  const [filteredData, setFilteredData] = useState(data);
+export default function SubjectTable({ data, filteredData }: Props) {
   const [activePage, setPage] = useState(1);
 
   let displayDataChunk: SubjectCardProps[][] = [];
@@ -34,8 +32,7 @@ export default function SubjectTable({ data }: Props) {
   }
 
   return (
-    <Container mih={'100vh'} py="xl" my="lg">
-      <Toolbar data={data} filteredData={filteredData} setFilteredData={setFilteredData} />
+    <Container mih={'100vh'} py="xl">
       <Flex gap="xs" justify="center" align="flex-start" wrap="wrap">
         {data.length === 0 ? (
           <>

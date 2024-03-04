@@ -5,6 +5,10 @@ import { ActionIcon, useComputedColorScheme, useMantineColorScheme } from '@mant
 
 import './App.css';
 import SubjectTable from './components/SubjectTable';
+import { SubjectCardProps } from './components/SubjectCard';
+
+import Toolbar from './components/Toolbar';
+
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 
 function App() {
@@ -13,6 +17,7 @@ function App() {
   const [dark, setDark] = useState(computedColorScheme === 'dark');
 
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState<SubjectCardProps[]>([]);
 
   useEffect(() => {
     fetch('https://055d8281-4c59-4576-9474-9b4840b30078.mock.pstmn.io/subjects')
@@ -34,7 +39,8 @@ function App() {
       >
         {dark ? <MoonIcon style={{ width: 18, height: 18 }} /> : <SunIcon style={{ width: 18, height: 18 }} />}
       </ActionIcon>
-      <SubjectTable data={data} />
+      <Toolbar data={data} filteredData={filteredData} setFilteredData={setFilteredData} />
+      <SubjectTable data={data} filteredData={filteredData} />
     </>
   );
 }
