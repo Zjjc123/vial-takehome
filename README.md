@@ -51,21 +51,23 @@ https://zjjc123.github.io/vial-takehome/
 
 ### Filtering
 
-- name (search bar)
-- age (range slider)
-- gender (dropdown)
-- diagnosis date (calendar range)
-- status (dropdown)
+- Name (search bar)
+- Age (range slider)
+- Gender (dropdown)
+- Diagnosis date (calendar range)
+- Status (dropdown)
 
 ### Sort by attributes (ascending)
 
-- name
-- age
-- diagnosis date
+- Name
+- Age
+- Diagnosis Date
 
 ### Others
 
 - Colored tag based on status
+- Light/Dark mode with mantine
+
 - Mobile accessibility (flexbox)
 - CI/CD
 
@@ -73,4 +75,3 @@ https://zjjc123.github.io/vial-takehome/
 
 - UI testing with Storybook
 - export selected data as json
-- light/dark mode with mantine
