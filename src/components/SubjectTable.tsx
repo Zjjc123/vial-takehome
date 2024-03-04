@@ -24,6 +24,8 @@ export default function SubjectTable({ data }: Props) {
   const [gender, setGender] = useState<string | null>('All');
   const [status, setStatus] = useState<string | null>('All');
 
+  const [onCalendar, setOnCalendar] = useState(false);
+
   useEffect(() => {
     const maxAge = data.reduce((acc, item) => (item.age > acc ? item.age : acc), 0);
     setMaxAge(maxAge);
@@ -100,7 +102,7 @@ export default function SubjectTable({ data }: Props) {
           placeholder="Search by name"
           onChange={(event) => setName(event.currentTarget.value)}
         />
-        <Menu closeOnItemClick={false}>
+        <Menu closeOnItemClick={false} closeOnClickOutside={!onCalendar}>
           <Menu.Target>
             <Button leftSection={<AiOutlineFilter size={20} />} variant="light">
               Filter
@@ -119,8 +121,8 @@ export default function SubjectTable({ data }: Props) {
                 }}
               />
             </Menu.Item>
+            <Menu.Label>Gender</Menu.Label>
             <Menu.Item>
-              <Menu.Label>Gender</Menu.Label>
               <Select
                 data={['All', 'Male', 'Female']}
                 allowDeselect={false}
@@ -131,8 +133,8 @@ export default function SubjectTable({ data }: Props) {
                 }}
               />
             </Menu.Item>
+            <Menu.Label>Status</Menu.Label>
             <Menu.Item>
-              <Menu.Label>Status</Menu.Label>
               <Select
                 data={['All', 'Active', 'Inactive']}
                 allowDeselect={false}
@@ -144,23 +146,27 @@ export default function SubjectTable({ data }: Props) {
               />
             </Menu.Item>
             <Menu.Divider />
+            <Menu.Label>Diagnosis Date</Menu.Label>
             <Menu.Item closeMenuOnClick={false}>
-              <Menu.Label>Diagnosis Date</Menu.Label>
               <DateInput
+                onClick={() => setOnCalendar(true)}
                 clearable
                 placeholder="Select start date"
                 value={startDate}
                 onChange={(value) => {
                   setStartDate(value);
+                  setOnCalendar(false);
                 }}
               />
               <Menu.Label>to</Menu.Label>
               <DateInput
+                onClick={() => setOnCalendar(true)}
                 clearable
                 placeholder="Select end date"
                 value={endDate}
                 onChange={(value) => {
                   setEndDate(value);
+                  setOnCalendar(false);
                 }}
               />
             </Menu.Item>
